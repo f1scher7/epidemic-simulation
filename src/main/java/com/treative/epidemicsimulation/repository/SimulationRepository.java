@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SimulationRepository extends JpaRepository<Simulation, Long> {
 
-
+    Simulation findByName(String name);
 
 }
