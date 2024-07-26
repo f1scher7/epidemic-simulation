@@ -23,8 +23,7 @@ public class Simulation {
     // wiem, że jest Lombok)
     public Simulation() {}
 
-    public Simulation(Long id, String name, int population, int initialInfected, double infectionRate, double mortalityRate, int daysToRecovery, int daysToDeath, int simulationDays) {
-        this.id = id;
+    public Simulation(String name, int population, int initialInfected, double infectionRate, double mortalityRate, int daysToRecovery, int daysToDeath, int simulationDays) {
         this.name = name;
         this.population = population;
         this.initialInfected = initialInfected;
