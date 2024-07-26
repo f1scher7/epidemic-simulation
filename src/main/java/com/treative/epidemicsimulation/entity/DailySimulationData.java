@@ -21,8 +21,7 @@ public class DailySimulationData {
 
     public DailySimulationData() {}
 
-    public DailySimulationData(Long id, Simulation simulation, int infected, int healthy, int dead, int recovered, int day) {
-        this.id = id;
+    public DailySimulationData(Simulation simulation, int infected, int healthy, int dead, int recovered, int day) {
         this.simulation = simulation;
         this.infected = infected;
         this.healthy = healthy;
@@ -33,31 +32,31 @@ public class DailySimulationData {
 
 
     public Long getId() {
-        return id;
+        return this.id;
     }
 
     public Simulation getSimulation() {
-        return simulation;
+        return this.simulation;
     }
 
     public int getInfected() {
-        return infected;
+        return this.infected;
     }
 
     public int getHealthy() {
-        return healthy;
+        return this.healthy;
     }
 
     public int getDead() {
-        return dead;
+        return this.dead;
     }
 
     public int getRecovered() {
-        return recovered;
+        return this.recovered;
     }
 
     public int getDay() {
-        return day;
+        return this.day;
     }
 
 
