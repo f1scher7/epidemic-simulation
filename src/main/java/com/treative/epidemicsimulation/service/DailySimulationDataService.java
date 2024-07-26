@@ -27,10 +27,10 @@ public class DailySimulationDataService {
     }
 
     @Transactional
-    public void saveAllDailySimulationData(List<DailySimulationData> dailySimulationDataList) throws CorruptedDailySimulationDataException {
+    public List<DailySimulationData> saveAllDailySimulationData(List<DailySimulationData> dailySimulationDataList) throws CorruptedDailySimulationDataException {
         if (areAllDailySimulationDataCorrect(dailySimulationDataList)) {
             this.dailySimulationDataRepository.deleteAllBySimulationId(dailySimulationDataList.get(0).getSimulation().getId());
-            this.dailySimulationDataRepository.saveAll(dailySimulationDataList);
+            return this.dailySimulationDataRepository.saveAll(dailySimulationDataList);
         } else {
             throw new CorruptedDailySimulationDataException();
         }
@@ -47,6 +47,7 @@ public class DailySimulationDataService {
     public void deleteAllDailySimulationDataBySimulationId(Long simulationId) {
         this.dailySimulationDataRepository.deleteAllBySimulationId(simulationId);
     }
+
 
     private boolean areAllDailySimulationDataCorrect(List<DailySimulationData> dailySimulationDataList) {
         if (dailySimulationDataList.isEmpty()) {
