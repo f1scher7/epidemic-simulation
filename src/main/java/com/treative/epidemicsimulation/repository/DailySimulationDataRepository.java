@@ -15,7 +15,7 @@ public interface DailySimulationDataRepository extends JpaRepository<DailySimula
 
     @Transactional
     @Modifying
-    @Query("DELETE FROM DailySimulationData simData WHERE simData.simulation.id = :simualtionId")
+    @Query("DELETE FROM DailySimulationData simData WHERE simData.simulation.id = :simulationId")
     void deleteAllBySimulationId(@Param("simulationId") Long simulationId);
 
     @Transactional
