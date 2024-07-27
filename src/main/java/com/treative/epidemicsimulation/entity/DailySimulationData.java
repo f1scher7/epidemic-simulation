@@ -16,17 +16,21 @@ public class DailySimulationData {
     private int healthy;    //Pv
     private int dead;    //Pm
     private int recovered;    //Pr
+    private double restrictionLevel;
+    private double peopleMood;
     private int day;
 
 
     public DailySimulationData() {}
 
-    public DailySimulationData(Simulation simulation, int infected, int healthy, int dead, int recovered, int day) {
+    public DailySimulationData(Simulation simulation, int infected, int healthy, int dead, int recovered, double restrictionLevel, double peopleMood, int day) {
         this.simulation = simulation;
         this.infected = infected;
         this.healthy = healthy;
         this.dead = dead;
         this.recovered = recovered;
+        this.restrictionLevel = restrictionLevel;
+        this.peopleMood = peopleMood;
         this.day = day;
     }
 
@@ -53,6 +57,14 @@ public class DailySimulationData {
 
     public int getRecovered() {
         return this.recovered;
+    }
+
+    public double getRestrictionLevel() {
+        return this.restrictionLevel;
+    }
+
+    public double getPeopleMood() {
+        return this.peopleMood;
     }
 
     public int getDay() {
@@ -84,6 +96,14 @@ public class DailySimulationData {
         this.recovered = recovered;
     }
 
+    public void setRestrictionLevel(double restrictionLevel) {
+        this.restrictionLevel = restrictionLevel;
+    }
+
+    public void setPeopleMood(double peopleMood) {
+        this.peopleMood = peopleMood;
+    }
+
     public void setDay(int day) {
         this.day = day;
     }
@@ -98,6 +118,8 @@ public class DailySimulationData {
                 ", healthy=" + healthy +
                 ", dead=" + dead +
                 ", recovered=" + recovered +
+                ", restrictionLevel=" + restrictionLevel +
+                ", peopleMood=" + peopleMood +
                 ", day=" + day +
                 '}';
     }
