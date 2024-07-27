@@ -15,6 +15,7 @@ public class Simulation {
     private int initialInfected;     //I
     private double infectionRate;    //R
     private double mortalityRate;     //M
+    private int infectionDaysDelay;
     private int daysToRecovery;     //Ti
     private int daysToDeath;    //Tm
     private int simulationDays;     //Ts
@@ -23,12 +24,13 @@ public class Simulation {
     // wiem, że jest Lombok)
     public Simulation() {}
 
-    public Simulation(String name, int population, int initialInfected, double infectionRate, double mortalityRate, int daysToRecovery, int daysToDeath, int simulationDays) {
+    public Simulation(String name, int population, int initialInfected, double infectionRate, double mortalityRate, int infectionDaysDelay, int daysToRecovery, int daysToDeath, int simulationDays) {
         this.name = name;
         this.population = population;
         this.initialInfected = initialInfected;
         this.infectionRate = infectionRate;
         this.mortalityRate = mortalityRate;
+        this.infectionDaysDelay = infectionDaysDelay;
         this.daysToRecovery = daysToRecovery;
         this.daysToDeath = daysToDeath;
         this.simulationDays = simulationDays;
@@ -57,6 +59,10 @@ public class Simulation {
 
     public double getMortalityRate() {
         return this.mortalityRate;
+    }
+
+    public int getInfectionDaysDelay() {
+        return this.infectionDaysDelay;
     }
 
     public int getDaysToRecovery() {
@@ -96,6 +102,10 @@ public class Simulation {
         this.mortalityRate = mortalityRate;
     }
 
+    public void setInfectionDaysDelay(int infectionDaysDelay) {
+        this.infectionDaysDelay = infectionDaysDelay;
+    }
+
     public void setDaysToRecovery(int daysToRecovery) {
         this.daysToRecovery = daysToRecovery;
     }
@@ -118,6 +128,7 @@ public class Simulation {
                 ", initialInfected=" + initialInfected +
                 ", infectionRate=" + infectionRate +
                 ", mortalityRate=" + mortalityRate +
+                ", infectiousDaysDelay=" + infectionDaysDelay +
                 ", daysToRecovery=" + daysToRecovery +
                 ", daysToDeath=" + daysToDeath +
                 ", simulationDays=" + simulationDays +
