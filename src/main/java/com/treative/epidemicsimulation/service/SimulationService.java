@@ -1,6 +1,7 @@
 package com.treative.epidemicsimulation.service;
 
 import com.treative.epidemicsimulation.entity.Simulation;
+import com.treative.epidemicsimulation.repository.DailySimulationDataRepository;
 import com.treative.epidemicsimulation.repository.SimulationRepository;
 import com.treative.epidemicsimulation.service.exceptions.NullFieldException;
 import com.treative.epidemicsimulation.service.exceptions.simulation.IncorrectInfectionRateException;
@@ -17,11 +18,13 @@ import java.util.List;
 public class SimulationService {
 
     private final SimulationRepository simulationRepository;
+    private final DailySimulationDataService dailySimulationDataService;
 
 
     @Autowired
-    public SimulationService(SimulationRepository simulationRepository) {
+    public SimulationService(SimulationRepository simulationRepository, DailySimulationDataService dailySimulationDataService) {
         this.simulationRepository = simulationRepository;
+        this.dailySimulationDataService = dailySimulationDataService;
     }
 
 
@@ -31,6 +34,7 @@ public class SimulationService {
         }
 
         validateSimulation(simulation);
+
         this.simulationRepository.save(simulation);
     }
 
@@ -55,11 +59,15 @@ public class SimulationService {
             existingSimulation.setInitialInfected(updatedSimulation.getInitialInfected());
             existingSimulation.setInfectionRate(updatedSimulation.getInfectionRate());
             existingSimulation.setMortalityRate(updatedSimulation.getMortalityRate());
+            existingSimulation.setInfectionDaysDelay(updatedSimulation.getInfectionDaysDelay());
             existingSimulation.setDaysToRecovery(updatedSimulation.getDaysToRecovery());
             existingSimulation.setDaysToDeath(updatedSimulation.getDaysToDeath());
             existingSimulation.setSimulationDays(updatedSimulation.getSimulationDays());
 
             validateSimulation(existingSimulation);
+
+            this.dailySimulationDataService.deleteAllDailySimulationDataBySimulationId(existingSimulation.getId());
+
             return this.simulationRepository.save(existingSimulation);
         }
 
@@ -67,6 +75,7 @@ public class SimulationService {
     }
 
     public void deleteSimulationById(Long id) {
+        this.dailySimulationDataService.deleteAllDailySimulationDataBySimulationId(id);
         this.simulationRepository.deleteById(id);
     }
 
@@ -82,6 +91,10 @@ public class SimulationService {
 
         if (simulation.getInitialInfected() <= 0) {
             throw new NullFieldException("Initial infected");
+        }
+
+        if (simulation.getInfectionDaysDelay() < 0) {
+            throw new NullFieldException("Infectious days delay");
         }
 
         if (simulation.getDaysToDeath() <= 0 ) {
