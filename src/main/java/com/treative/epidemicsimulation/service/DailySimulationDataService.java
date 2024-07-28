@@ -22,10 +22,6 @@ public class DailySimulationDataService {
     }
 
 
-    public void saveDailySimulationData(DailySimulationData dailySimulationData) {
-        this.dailySimulationDataRepository.save(dailySimulationData);
-    }
-
     @Transactional
     public List<DailySimulationData> saveAllDailySimulationData(List<DailySimulationData> dailySimulationDataList) throws CorruptedDailySimulationDataException {
         if (areAllDailySimulationDataCorrect(dailySimulationDataList)) {
