@@ -2,8 +2,6 @@ package com.treative.epidemicsimulation.service;
 
 import com.treative.epidemicsimulation.entity.DailySimulationData;
 import com.treative.epidemicsimulation.entity.Simulation;
-import com.treative.epidemicsimulation.service.exceptions.dailysimulationdata.CorruptedDailySimulationDataException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,16 +15,7 @@ import static com.treative.epidemicsimulation.utils.EpidemicSimulationUtil.*;
 @Service
 public class EpidemicSimulationService {
 
-    private final DailySimulationDataService dailySimulationDataService;
-
-
-    @Autowired
-    public EpidemicSimulationService(DailySimulationDataService dailySimulationDataService) {
-        this.dailySimulationDataService = dailySimulationDataService;
-    }
-
-
-    public List<DailySimulationData> runEpidemicSimulation(Simulation simulation) throws CorruptedDailySimulationDataException {
+    public List<DailySimulationData> runEpidemicSimulation(Simulation simulation) {
         List<DailySimulationData> dailySimulationDataList = new ArrayList<>();
 
         int totalPopulation = simulation.getPopulation();
@@ -83,7 +72,7 @@ public class EpidemicSimulationService {
             dailySimulationDataList.add(new DailySimulationData(simulation, infectedDaysList.size(), healthy, dead, recovered, restrictionLevel, peopleMood, day));
         }
 
-        return this.dailySimulationDataService.saveAllDailySimulationData(dailySimulationDataList);
+        return dailySimulationDataList;
     }
 
     private List<Integer> updateInfectedDays(List<Integer> infectedDaysList, int daysToDeath, int daysToRecovery, int[] deadRecoveredCountArray, double mortalityRate) {
