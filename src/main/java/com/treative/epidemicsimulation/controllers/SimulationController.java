@@ -1,12 +1,12 @@
-package com.treative.epidemicsimulation.controller;
+package com.treative.epidemicsimulation.controllers;
 
 import com.treative.epidemicsimulation.entity.Simulation;
-import com.treative.epidemicsimulation.service.SimulationService;
-import com.treative.epidemicsimulation.service.exceptions.NullFieldException;
-import com.treative.epidemicsimulation.service.exceptions.simulation.IncorrectInfectionRateException;
-import com.treative.epidemicsimulation.service.exceptions.simulation.IncorrectInitialInfectedException;
-import com.treative.epidemicsimulation.service.exceptions.simulation.IncorrectMortalityRateException;
-import com.treative.epidemicsimulation.service.exceptions.simulation.SimulationNameAlreadyExistsException;
+import com.treative.epidemicsimulation.services.SimulationService;
+import com.treative.epidemicsimulation.services.exceptions.NullFieldException;
+import com.treative.epidemicsimulation.services.exceptions.simulation.IncorrectInfectionRateException;
+import com.treative.epidemicsimulation.services.exceptions.simulation.IncorrectInitialInfectedException;
+import com.treative.epidemicsimulation.services.exceptions.simulation.IncorrectMortalityRateException;
+import com.treative.epidemicsimulation.services.exceptions.simulation.SimulationNameAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

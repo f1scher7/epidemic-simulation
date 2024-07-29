@@ -1,4 +1,4 @@
-package com.treative.epidemicsimulation.service;
+package com.treative.epidemicsimulation.services;
 
 import com.treative.epidemicsimulation.entity.DailySimulationData;
 import com.treative.epidemicsimulation.entity.Simulation;

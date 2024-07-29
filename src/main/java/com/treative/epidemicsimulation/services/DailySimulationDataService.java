@@ -1,8 +1,8 @@
-package com.treative.epidemicsimulation.service;
+package com.treative.epidemicsimulation.services;
 
 import com.treative.epidemicsimulation.entity.DailySimulationData;
 import com.treative.epidemicsimulation.entity.Simulation;
-import com.treative.epidemicsimulation.repository.DailySimulationDataRepository;
+import com.treative.epidemicsimulation.repositories.DailySimulationDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +32,7 @@ public class DailySimulationDataService {
             if (findAllDailySimulationDataBySimulationId(simulationId) != null) {
                 deleteAllDailySimulationDataBySimulationId(simulationId);
             }
-            return this.epidemicSimulationService.runEpidemicSimulation(simulation);
+            return this.dailySimulationDataRepository.saveAll(this.epidemicSimulationService.runEpidemicSimulation(simulation));
         }
 
         return null;

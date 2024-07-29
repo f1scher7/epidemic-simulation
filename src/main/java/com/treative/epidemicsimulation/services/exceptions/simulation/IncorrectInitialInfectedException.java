@@ -1,4 +1,4 @@
-package com.treative.epidemicsimulation.service.exceptions.simulation;
+package com.treative.epidemicsimulation.services.exceptions.simulation;
 
 public class IncorrectInitialInfectedException extends Exception {
 

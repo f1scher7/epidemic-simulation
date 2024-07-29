@@ -1,10 +1,10 @@
-package com.treative.epidemicsimulation.service;
+package com.treative.epidemicsimulation.services;
 
 import com.treative.epidemicsimulation.entity.Simulation;
-import com.treative.epidemicsimulation.repository.SimulationRepository;
-import com.treative.epidemicsimulation.service.exceptions.NullFieldException;
-import com.treative.epidemicsimulation.service.exceptions.simulation.IncorrectInfectionRateException;
-import com.treative.epidemicsimulation.service.exceptions.simulation.SimulationNameAlreadyExistsException;
+import com.treative.epidemicsimulation.repositories.SimulationRepository;
+import com.treative.epidemicsimulation.services.exceptions.NullFieldException;
+import com.treative.epidemicsimulation.services.exceptions.simulation.IncorrectInfectionRateException;
+import com.treative.epidemicsimulation.services.exceptions.simulation.SimulationNameAlreadyExistsException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

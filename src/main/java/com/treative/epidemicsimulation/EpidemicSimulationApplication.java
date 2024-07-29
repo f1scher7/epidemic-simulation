@@ -1,11 +1,11 @@
 package com.treative.epidemicsimulation;
 
 import com.treative.epidemicsimulation.entity.Simulation;
-import com.treative.epidemicsimulation.repository.DailySimulationDataRepository;
-import com.treative.epidemicsimulation.repository.SimulationRepository;
-import com.treative.epidemicsimulation.service.DailySimulationDataService;
-import com.treative.epidemicsimulation.service.EpidemicSimulationService;
-import com.treative.epidemicsimulation.service.SimulationService;
+import com.treative.epidemicsimulation.repositories.DailySimulationDataRepository;
+import com.treative.epidemicsimulation.repositories.SimulationRepository;
+import com.treative.epidemicsimulation.services.DailySimulationDataService;
+import com.treative.epidemicsimulation.services.EpidemicSimulationService;
+import com.treative.epidemicsimulation.services.SimulationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -37,7 +37,7 @@ public class EpidemicSimulationApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        this.simulationService.deleteSimulationById((long) 89);
+        this.simulationService.deleteSimulationById((long) 94);
 
         Simulation covidSimulation = new Simulation();
         covidSimulation.setName("Symulacja Epidemii COVID-19");
@@ -49,9 +49,43 @@ public class EpidemicSimulationApplication implements CommandLineRunner {
         covidSimulation.setDaysToRecovery(14);
         covidSimulation.setDaysToDeath(21);
         covidSimulation.setSimulationDays(365);
+        simulationService.saveSimulation(covidSimulation);
 
-        this.simulationService.saveSimulation(covidSimulation);
-        this.epidemicSimulationService.runEpidemicSimulation(covidSimulation);
+        Simulation fluSimulation = new Simulation();
+        fluSimulation.setName("Symulacja Epidemii Grypy");
+        fluSimulation.setPopulation(5000000);
+        fluSimulation.setInitialInfected(500);
+        fluSimulation.setInfectionRate(0.05);
+        fluSimulation.setMortalityRate(0.002);
+        fluSimulation.setInfectionDaysDelay(2);
+        fluSimulation.setDaysToRecovery(7);
+        fluSimulation.setDaysToDeath(14);
+        fluSimulation.setSimulationDays(180);
+        simulationService.saveSimulation(fluSimulation);
+
+        Simulation ebolaSimulation = new Simulation();
+        ebolaSimulation.setName("Symulacja Epidemii Eboli");
+        ebolaSimulation.setPopulation(1000000);
+        ebolaSimulation.setInitialInfected(50);
+        ebolaSimulation.setInfectionRate(0.2);
+        ebolaSimulation.setMortalityRate(0.5);
+        ebolaSimulation.setInfectionDaysDelay(5);
+        ebolaSimulation.setDaysToRecovery(21);
+        ebolaSimulation.setDaysToDeath(30);
+        ebolaSimulation.setSimulationDays(100);
+        simulationService.saveSimulation(ebolaSimulation);
+
+        Simulation commonColdSimulation = new Simulation();
+        commonColdSimulation.setName("Symulacja Zwykłego Przeziębienia");
+        commonColdSimulation.setPopulation(1000000);
+        commonColdSimulation.setInitialInfected(1000);
+        commonColdSimulation.setInfectionRate(0.01);
+        commonColdSimulation.setMortalityRate(0.0001);
+        commonColdSimulation.setInfectionDaysDelay(1);
+        commonColdSimulation.setDaysToRecovery(5);
+        commonColdSimulation.setDaysToDeath(7);
+        commonColdSimulation.setSimulationDays(365);
+        simulationService.saveSimulation(commonColdSimulation);
     }
 
 }

@@ -1,4 +1,4 @@
-package com.treative.epidemicsimulation.repository;
+package com.treative.epidemicsimulation.repositories;
 
 import com.treative.epidemicsimulation.entity.DailySimulationData;
 import org.springframework.data.jpa.repository.JpaRepository;

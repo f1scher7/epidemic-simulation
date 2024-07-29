@@ -1,4 +1,4 @@
-package com.treative.epidemicsimulation.service;
+package com.treative.epidemicsimulation.services;
 
 public class DailySimulationDataServiceTest {
 }

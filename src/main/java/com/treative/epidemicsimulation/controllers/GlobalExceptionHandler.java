@@ -1,11 +1,11 @@
-package com.treative.epidemicsimulation.controller;
+package com.treative.epidemicsimulation.controllers;
 
-import com.treative.epidemicsimulation.service.exceptions.*;
-import com.treative.epidemicsimulation.service.exceptions.dailysimulationdata.CorruptedDailySimulationDataException;
-import com.treative.epidemicsimulation.service.exceptions.simulation.IncorrectInfectionRateException;
-import com.treative.epidemicsimulation.service.exceptions.simulation.IncorrectInitialInfectedException;
-import com.treative.epidemicsimulation.service.exceptions.simulation.IncorrectMortalityRateException;
-import com.treative.epidemicsimulation.service.exceptions.simulation.SimulationNameAlreadyExistsException;
+import com.treative.epidemicsimulation.services.exceptions.*;
+import com.treative.epidemicsimulation.services.exceptions.dailysimulationdata.CorruptedDailySimulationDataException;
+import com.treative.epidemicsimulation.services.exceptions.simulation.IncorrectInfectionRateException;
+import com.treative.epidemicsimulation.services.exceptions.simulation.IncorrectInitialInfectedException;
+import com.treative.epidemicsimulation.services.exceptions.simulation.IncorrectMortalityRateException;
+import com.treative.epidemicsimulation.services.exceptions.simulation.SimulationNameAlreadyExistsException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;

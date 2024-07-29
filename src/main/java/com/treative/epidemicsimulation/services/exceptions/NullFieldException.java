@@ -1,4 +1,4 @@
-package com.treative.epidemicsimulation.service.exceptions;
+package com.treative.epidemicsimulation.services.exceptions;
 
 public class NullFieldException extends Exception {
 

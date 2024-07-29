@@ -1,13 +1,14 @@
-package com.treative.epidemicsimulation.service;
+package com.treative.epidemicsimulation.services;
 
 import com.treative.epidemicsimulation.entity.Simulation;
-import com.treative.epidemicsimulation.repository.SimulationRepository;
-import com.treative.epidemicsimulation.service.exceptions.NullFieldException;
-import com.treative.epidemicsimulation.service.exceptions.simulation.IncorrectInfectionRateException;
-import com.treative.epidemicsimulation.service.exceptions.simulation.IncorrectInitialInfectedException;
-import com.treative.epidemicsimulation.service.exceptions.simulation.IncorrectMortalityRateException;
-import com.treative.epidemicsimulation.service.exceptions.simulation.SimulationNameAlreadyExistsException;
+import com.treative.epidemicsimulation.repositories.SimulationRepository;
+import com.treative.epidemicsimulation.services.exceptions.NullFieldException;
+import com.treative.epidemicsimulation.services.exceptions.simulation.IncorrectInfectionRateException;
+import com.treative.epidemicsimulation.services.exceptions.simulation.IncorrectInitialInfectedException;
+import com.treative.epidemicsimulation.services.exceptions.simulation.IncorrectMortalityRateException;
+import com.treative.epidemicsimulation.services.exceptions.simulation.SimulationNameAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,7 +22,7 @@ public class SimulationService {
 
 
     @Autowired
-    public SimulationService(SimulationRepository simulationRepository, DailySimulationDataService dailySimulationDataService) {
+    public SimulationService(SimulationRepository simulationRepository, @Lazy DailySimulationDataService dailySimulationDataService) {
         this.simulationRepository = simulationRepository;
         this.dailySimulationDataService = dailySimulationDataService;
     }

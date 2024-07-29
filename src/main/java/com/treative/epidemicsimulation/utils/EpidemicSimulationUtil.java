@@ -9,7 +9,7 @@ public final class EpidemicSimulationUtil {
 
     public static double calculateUpdatedInfectionRate(double initialInfectionRate, double restrictionLevel, int infected, int totalPopulation) {
         if (restrictionLevel < 0.4) {
-            initialInfectionRate *= 1.04;
+            initialInfectionRate *= 1.037;
         }
 
         double infectionProportion = (double) infected / totalPopulation;

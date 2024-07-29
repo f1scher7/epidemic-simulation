@@ -1,4 +1,4 @@
-package com.treative.epidemicsimulation.service.exceptions.dailysimulationdata;
+package com.treative.epidemicsimulation.services.exceptions.dailysimulationdata;
 
 public class CorruptedDailySimulationDataException extends Exception {
 

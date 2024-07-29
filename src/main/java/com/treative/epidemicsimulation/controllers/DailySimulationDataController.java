@@ -1,7 +1,7 @@
-package com.treative.epidemicsimulation.controller;
+package com.treative.epidemicsimulation.controllers;
 
 import com.treative.epidemicsimulation.entity.DailySimulationData;
-import com.treative.epidemicsimulation.service.DailySimulationDataService;
+import com.treative.epidemicsimulation.services.DailySimulationDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
