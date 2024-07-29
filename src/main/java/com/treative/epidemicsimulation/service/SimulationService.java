@@ -28,14 +28,14 @@ public class SimulationService {
     }
 
 
-    public void saveSimulation(Simulation simulation) throws SimulationNameAlreadyExistsException, IncorrectInfectionRateException, IncorrectMortalityRateException, IncorrectInitialInfectedException, NullFieldException {
+    public Simulation saveSimulation(Simulation simulation) throws SimulationNameAlreadyExistsException, IncorrectInfectionRateException, IncorrectMortalityRateException, IncorrectInitialInfectedException, NullFieldException {
         if (this.simulationRepository.findByName(simulation.getName()) != null) {
             throw new SimulationNameAlreadyExistsException();
         }
 
         validateSimulation(simulation);
 
-        this.simulationRepository.save(simulation);
+        return this.simulationRepository.save(simulation);
     }
 
     public Simulation findSimulationById(Long id) {
