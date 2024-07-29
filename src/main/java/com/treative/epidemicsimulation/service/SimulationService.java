@@ -1,7 +1,6 @@
 package com.treative.epidemicsimulation.service;
 
 import com.treative.epidemicsimulation.entity.Simulation;
-import com.treative.epidemicsimulation.repository.DailySimulationDataRepository;
 import com.treative.epidemicsimulation.repository.SimulationRepository;
 import com.treative.epidemicsimulation.service.exceptions.NullFieldException;
 import com.treative.epidemicsimulation.service.exceptions.simulation.IncorrectInfectionRateException;

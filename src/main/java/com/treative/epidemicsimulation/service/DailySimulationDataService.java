@@ -3,10 +3,8 @@ package com.treative.epidemicsimulation.service;
 import com.treative.epidemicsimulation.entity.DailySimulationData;
 import com.treative.epidemicsimulation.entity.Simulation;
 import com.treative.epidemicsimulation.repository.DailySimulationDataRepository;
-import com.treative.epidemicsimulation.service.exceptions.dailysimulationdata.CorruptedDailySimulationDataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -27,7 +25,7 @@ public class DailySimulationDataService {
     }
 
 
-    public List<DailySimulationData> saveAllDailySimulationDataBySimulationId(Long simulationId) throws CorruptedDailySimulationDataException {
+    public List<DailySimulationData> saveAllDailySimulationDataBySimulationId(Long simulationId) {
         Simulation simulation = this.simulationService.findSimulationById(simulationId);
 
         if (simulation != null) {

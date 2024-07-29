@@ -2,7 +2,6 @@ package com.treative.epidemicsimulation.controller;
 
 import com.treative.epidemicsimulation.entity.DailySimulationData;
 import com.treative.epidemicsimulation.service.DailySimulationDataService;
-import com.treative.epidemicsimulation.service.exceptions.dailysimulationdata.CorruptedDailySimulationDataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +22,7 @@ public class DailySimulationDataController {
 
 
     @PostMapping("/create-all/{simulationId}")
-    public ResponseEntity<?> createAllDailySimulationDataBySimulationId(@PathVariable Long simulationId) throws CorruptedDailySimulationDataException {
+    public ResponseEntity<?> createAllDailySimulationDataBySimulationId(@PathVariable Long simulationId) {
         List<DailySimulationData> dailySimulationDataList = this.dailySimulationDataService.saveAllDailySimulationDataBySimulationId(simulationId);
         return ResponseEntity.ok().body(dailySimulationDataList);
     }
