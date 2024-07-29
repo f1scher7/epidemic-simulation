@@ -13,23 +13,31 @@ import java.util.List;
 @Service
 public class DailySimulationDataService {
 
+    private final SimulationService simulationService;
+    private final EpidemicSimulationService epidemicSimulationService;
     private final DailySimulationDataRepository dailySimulationDataRepository;
 
 
     @Autowired
-    public DailySimulationDataService(DailySimulationDataRepository dailySimulationDataRepository) {
+    public DailySimulationDataService(SimulationService simulationService, EpidemicSimulationService epidemicSimulationService, DailySimulationDataRepository dailySimulationDataRepository) {
+        this.simulationService = simulationService;
+        this.epidemicSimulationService = epidemicSimulationService;
         this.dailySimulationDataRepository = dailySimulationDataRepository;
+
     }
 
 
-    @Transactional
-    public List<DailySimulationData> saveAllDailySimulationData(List<DailySimulationData> dailySimulationDataList) throws CorruptedDailySimulationDataException {
-        if (areAllDailySimulationDataCorrect(dailySimulationDataList)) {
-            this.dailySimulationDataRepository.deleteAllBySimulationId(dailySimulationDataList.get(0).getSimulation().getId());
-            return this.dailySimulationDataRepository.saveAll(dailySimulationDataList);
-        } else {
-            throw new CorruptedDailySimulationDataException();
+    public List<DailySimulationData> saveAllDailySimulationDataBySimulationId(Long simulationId) throws CorruptedDailySimulationDataException {
+        Simulation simulation = this.simulationService.findSimulationById(simulationId);
+
+        if (simulation != null) {
+            if (findAllDailySimulationDataBySimulationId(simulationId) != null) {
+                deleteAllDailySimulationDataBySimulationId(simulationId);
+            }
+            return this.epidemicSimulationService.runEpidemicSimulation(simulation);
         }
+
+        return null;
     }
 
     public DailySimulationData findDailySimulationDataById(Long id) {
