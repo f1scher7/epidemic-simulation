@@ -68,6 +68,7 @@ public class SimulationService {
             validateSimulation(existingSimulation);
 
             this.dailySimulationDataService.deleteAllDailySimulationDataBySimulationId(existingSimulation.getId());
+            this.dailySimulationDataService.saveAllDailySimulationDataBySimulationId(existingSimulation.getId());
 
             return this.simulationRepository.save(existingSimulation);
         }
@@ -114,11 +115,11 @@ public class SimulationService {
             throw new InitialInfectedExceedsPopulationException();
         }
 
-        if (simulation.getInfectionRate() < 0 || simulation.getInfectionRate() > 1) {
+        if (simulation.getInfectionRate() < 0.1 || simulation.getInfectionRate() > 1) {
             throw new IncorrectInfectionRateException();
         }
 
-        if (simulation.getMortalityRate() < 0 || simulation.getMortalityRate() > 1) {
+        if (simulation.getMortalityRate() < 0.01 || simulation.getMortalityRate() > 1) {
             throw new IncorrectMortalityRateException();
         }
 
