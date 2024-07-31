@@ -37,8 +37,7 @@ public class EpidemicSimulationApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        this.simulationService.deleteSimulationById((long) 94);
-
+        /*
         Simulation covidSimulation = new Simulation();
         covidSimulation.setName("Symulacja Epidemii COVID-19");
         covidSimulation.setPopulation(10000000);
@@ -55,8 +54,8 @@ public class EpidemicSimulationApplication implements CommandLineRunner {
         fluSimulation.setName("Symulacja Epidemii Grypy");
         fluSimulation.setPopulation(5000000);
         fluSimulation.setInitialInfected(500);
-        fluSimulation.setInfectionRate(0.05);
-        fluSimulation.setMortalityRate(0.002);
+        fluSimulation.setInfectionRate(0.2);
+        fluSimulation.setMortalityRate(0.02);
         fluSimulation.setInfectionDaysDelay(2);
         fluSimulation.setDaysToRecovery(7);
         fluSimulation.setDaysToDeath(14);
@@ -79,13 +78,14 @@ public class EpidemicSimulationApplication implements CommandLineRunner {
         commonColdSimulation.setName("Symulacja Zwykłego Przeziębienia");
         commonColdSimulation.setPopulation(1000000);
         commonColdSimulation.setInitialInfected(1000);
-        commonColdSimulation.setInfectionRate(0.01);
-        commonColdSimulation.setMortalityRate(0.0001);
+        commonColdSimulation.setInfectionRate(0.1);
+        commonColdSimulation.setMortalityRate(0.01);
         commonColdSimulation.setInfectionDaysDelay(1);
         commonColdSimulation.setDaysToRecovery(5);
         commonColdSimulation.setDaysToDeath(7);
         commonColdSimulation.setSimulationDays(365);
         simulationService.saveSimulation(commonColdSimulation);
+        */
     }
 
 }
