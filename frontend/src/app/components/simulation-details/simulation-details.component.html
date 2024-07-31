@@ -1,7 +1,11 @@
-<div class="bg vw-100 vh-100">
+<div class="bg w-100 h-100">
     <div class="container pt-4">
-        <h3 class="text-center mb-5">{{ simulation?.name }}</h3>
-
+        <div class="d-flex justify-content-between align-items-center w-100 mb-3">
+            <h3 class="text-center">{{ simulation?.name }}</h3>
+            <button class="btn btn-primary d-flex align-items-center" (click)="goToDashboard()">
+                <i class="fas fa-arrow-left me-2"></i> Back to Dashboard
+            </button>
+        </div>
         <div class="alert alert-primary d-inline-block" role="alert">
             <strong>Note:</strong> The fields below are available for editing. Make sure to save changes you make.
         </div>
@@ -9,25 +13,25 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="population" placeholder="Population" min="100000" [(ngModel)]="simulation.population" required>
+                    <input type="number" class="form-control" id="population" placeholder="Population" min="100000" [(ngModel)]="simulation.population" required>
                     <label for="population">Population</label>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="initialInfected" min="1" placeholder="Initial Infected" [(ngModel)]="simulation.initialInfected" required>
+                    <input type="number" class="form-control" id="initialInfected" min="1" placeholder="Initial Infected" [(ngModel)]="simulation.initialInfected" required>
                     <label for="initialInfected">Initial Infected</label>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="infectionRate" step="0.01" min="0.01" max="1.0" placeholder="Infection Rate" [(ngModel)]="simulation.infectionRate" required>
+                    <input type="number" class="form-control" id="infectionRate" step="0.01" min="0.1" max="1.0" placeholder="Infection Rate" [(ngModel)]="simulation.infectionRate" required>
                     <label for="infectionRate">Infection Rate</label>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="mortalityRate" step="0.01" min="0.01" max="1.0" placeholder="Mortality Rate" [(ngModel)]="simulation.mortalityRate" required>
+                    <input type="number" class="form-control" id="mortalityRate" step="0.01" min="0.01" max="1.0" placeholder="Mortality Rate" [(ngModel)]="simulation.mortalityRate" required>
                     <label for="mortalityRate">Mortality Rate</label>
                 </div>
             </div>
@@ -36,25 +40,25 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="infectionDaysDelay" min="1" placeholder="Infection Days Delay" [(ngModel)]="simulation.infectionDaysDelay" required>
+                    <input type="number" class="form-control" id="infectionDaysDelay" min="1" placeholder="Infection Days Delay" [(ngModel)]="simulation.infectionDaysDelay" required>
                     <label for="infectionDaysDelay">Infection Days Delay</label>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="daysToRecovery" min="1" placeholder="Days to Recovery" [(ngModel)]="simulation.daysToRecovery" required>
+                    <input type="number" class="form-control" id="daysToRecovery" min="1" placeholder="Days to Recovery" [(ngModel)]="simulation.daysToRecovery" required>
                     <label for="daysToRecovery">Days to Recovery</label>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="daysToDeath" min="1" placeholder="Days to Death" [(ngModel)]="simulation.daysToDeath" required>
+                    <input type="number" class="form-control" id="daysToDeath" min="1" placeholder="Days to Death" [(ngModel)]="simulation.daysToDeath" required>
                     <label for="daysToDeath">Days to Death</label>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="simulationDays" min="1" placeholder="Simulation Days" [(ngModel)]="simulation.simulationDays" required>
+                    <input type="number" class="form-control" id="simulationDays" min="1" placeholder="Simulation Days" [(ngModel)]="simulation.simulationDays" required>
                     <label for="simulationDays">Simulation Days</label>
                 </div>
             </div>
@@ -62,14 +66,38 @@
 
         <div class="row mt-2">
             <div class="col-md-12 text-center">
-                <button type="submit" class="btn btn-primary w-25">Save Changes</button>
+                <div *ngIf="successMess.updateSimulation" class="alert alert-success">
+                    {{ successMess.updateSimulation }}
+                </div>
+                <div *ngIf="errors.updateSimulation" class="alert alert-danger">
+                    {{ errors.updateSimulation }}
+                </div>
+                <button type="submit" class="btn btn-primary w-25" (click)="updateSimulationAndDailySimulationData(simulation)">Save Changes</button>
             </div>
         </div>
 
         <div class="row mt-4">
-            <div class="col-md-12">
-                <h4>Daily Simulation Data And Statistic</h4>
-
+            <h3>Daily Simulation Data And Statistic</h3>
+            <div class="col-md-3">
+                <div class="chart-container w-100 h-100">
+                    <canvas class="pieGraph" baseChart
+                            [data]="pieChartData"
+                            [options]="pieChartOptions"
+                            [type]="'pie'">
+                    </canvas>
+                    <div *ngIf="dailySimulationDataList.length > 0" class="ms-4">
+                        <p>Day: {{ currentDay }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="chart-container  d-flex justify-content-end">
+                    <canvas class="lineGraph w-75 h-100" baseChart
+                            [data]="lineChartData"
+                            [options]="lineChartOptions"
+                            [type]="'line'">
+                    </canvas>
+                </div>
             </div>
         </div>
     </div>
