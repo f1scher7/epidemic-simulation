@@ -2,10 +2,7 @@ package com.treative.epidemicsimulation.controllers;
 
 import com.treative.epidemicsimulation.services.exceptions.*;
 import com.treative.epidemicsimulation.services.exceptions.dailysimulationdata.CorruptedDailySimulationDataException;
-import com.treative.epidemicsimulation.services.exceptions.simulation.IncorrectInfectionRateException;
-import com.treative.epidemicsimulation.services.exceptions.simulation.IncorrectInitialInfectedException;
-import com.treative.epidemicsimulation.services.exceptions.simulation.IncorrectMortalityRateException;
-import com.treative.epidemicsimulation.services.exceptions.simulation.SimulationNameAlreadyExistsException;
+import com.treative.epidemicsimulation.services.exceptions.simulation.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -46,9 +43,15 @@ public class GlobalExceptionHandler {
         return createErrorResponse(HttpStatus.BAD_REQUEST, "errorCorruptedDailySimulationData", e.getMessage());
     }
 
+    @ExceptionHandler(InitialInfectedExceedsPopulationException.class)
+    public ResponseEntity<?> handleInitialInfectedExceedsPopulationException(InitialInfectedExceedsPopulationException e) {
+        return createErrorResponse(HttpStatus.BAD_REQUEST, "errorInitialInfectedExceedsPopulationException", e.getMessage());
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handleGeneralException(Exception e) {
         return createErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, "errorGeneral", "An unexpected error occurred: " + e.getMessage());
     }
+
 
 }
