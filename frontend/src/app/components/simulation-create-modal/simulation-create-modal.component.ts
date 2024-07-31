@@ -26,7 +26,7 @@ export class SimulationCreateModalComponent {
         name: '',
         population: 1,
         initialInfected: 1,
-        infectionRate: 0.01,
+        infectionRate: 0.1,
         mortalityRate: 0.01,
         infectionDaysDelay: 1,
         daysToRecovery: 1,

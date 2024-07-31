@@ -34,7 +34,6 @@ export class DashboardComponent implements OnInit {
         this.simulationService.getAllSimulations().subscribe({
             next: (data: SimulationModel[]) => {
                 this.simulations = data;
-                console.log(data);
             },
             error: (err) => {
                 console.log(err);
