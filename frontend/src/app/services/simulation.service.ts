@@ -53,8 +53,13 @@ export class SimulationService {
     }
 
     createSimulation(simulation: SimulationModel): Observable<SimulationModel> {
-        return this.http.post<SimulationModel>(`${this.baseUrl}/create`, simulation).pipe(catchError(this.handleError))
+        return this.http.post<SimulationModel>(`${this.baseUrl}/create`, simulation).pipe(catchError(this.handleError));
     }
+
+    updateSimulation(simulation: SimulationModel): Observable<SimulationModel> {
+        return this.http.post<SimulationModel>(`${this.baseUrl}/update`, simulation).pipe(catchError(this.handleError));
+    }
+
 
     deleteSimulation(simulation: SimulationModel) {
         return this.http.delete(`${this.baseUrl}/delete-by-id/${simulation.id}`);
