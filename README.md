@@ -4,6 +4,8 @@ This application is a full-stack simulation system designed to model the spread 
 
 ![EpidemicSimulationDashboard](https://github.com/user-attachments/assets/0af46535-656c-45cc-815c-0f105479e441)
 
+![EpidemicSimulationTest](https://github.com/user-attachments/assets/7fd8914d-8621-4b3c-addb-3d3aa6453c48)
+
 ## Technologies
 
 ### Front-End
