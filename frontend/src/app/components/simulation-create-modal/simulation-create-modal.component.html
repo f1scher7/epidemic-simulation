@@ -1,0 +1,89 @@
+<div *ngIf="isVisible" class="modal show d-block" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create Simulation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="onClose()" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="submitForm()">
+                    <div *ngIf="errors.createSimulation" class="alert alert-danger">{{ errors.createSimulation }}</div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Name" [(ngModel)]="newSimulation.name" required>
+                                <label for="name">Name</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="number" class="form-control" id="population" name="population" min="100000" placeholder="Population" [(ngModel)]="newSimulation.population" required>
+                                <label for="population">Population</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="number" class="form-control" id="initialInfected" name="initialInfected" min="1" placeholder="Initial Infected" [(ngModel)]="newSimulation.initialInfected" required>
+                                <label for="initialInfected">Initial Infected</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="number" class="form-control" id="infectionRate" name="infectionRate" step="0.01" min="0.01" max="1.0" placeholder="Infection Rate" [(ngModel)]="newSimulation.infectionRate" required>
+                                <label for="infectionRate">Infection Rate</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="number" class="form-control" id="mortalityRate" name="mortalityRate" step="0.01" min="0.01" max="1.0" placeholder="Mortality Rate" [(ngModel)]="newSimulation.mortalityRate" required>
+                                <label for="mortalityRate">Mortality Rate</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="number" class="form-control" id="infectionDaysDelay" name="infectionDaysDelay" min="1" placeholder="Infection Days Delay" [(ngModel)]="newSimulation.infectionDaysDelay" required>
+                                <label for="infectionDaysDelay">Infection Days Delay</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="number" class="form-control" id="daysToRecovery" name="daysToRecovery" min="1" placeholder="Days to Recovery" [(ngModel)]="newSimulation.daysToRecovery" required>
+                                <label for="daysToRecovery">Days to Recovery</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="number" class="form-control" id="daysToDeath" name="daysToDeath" min="1" placeholder="Days to Death" [(ngModel)]="newSimulation.daysToDeath" required>
+                                <label for="daysToDeath">Days to Death</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-floating">
+                                <input type="number" class="form-control" id="simulationDays" min="1" name="simulationDays" placeholder="Simulation Days" [(ngModel)]="newSimulation.simulationDays" required>
+                                <label for="simulationDays">Simulation Days</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer mt-4">
+                        <button type="button" class="btn btn-secondary" (click)="onClose()">Close</button>
+                        <button type="submit" class="btn btn-primary" (click)="submitForm()">Create</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
