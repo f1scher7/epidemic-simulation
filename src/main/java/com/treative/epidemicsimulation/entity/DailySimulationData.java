@@ -16,6 +16,7 @@ public class DailySimulationData {
     private int healthy;    //Pv
     private int dead;    //Pm
     private int recovered;    //Pr
+    private double dynamicalInfectionRate;
     private double restrictionLevel;
     private double peopleMood;
     private int day;
@@ -23,17 +24,17 @@ public class DailySimulationData {
 
     public DailySimulationData() {}
 
-    public DailySimulationData(Simulation simulation, int infected, int healthy, int dead, int recovered, double restrictionLevel, double peopleMood, int day) {
+    public DailySimulationData(Simulation simulation, int infected, int healthy, int dead, int recovered, double dynamicalInfectionRate, double restrictionLevel, double peopleMood, int day) {
         this.simulation = simulation;
         this.infected = infected;
         this.healthy = healthy;
         this.dead = dead;
         this.recovered = recovered;
+        this.dynamicalInfectionRate = dynamicalInfectionRate;
         this.restrictionLevel = restrictionLevel;
         this.peopleMood = peopleMood;
         this.day = day;
     }
-
 
     public Long getId() {
         return this.id;
@@ -57,6 +58,10 @@ public class DailySimulationData {
 
     public int getRecovered() {
         return this.recovered;
+    }
+
+    public double getDynamicalInfectionRate() {
+        return this.dynamicalInfectionRate;
     }
 
     public double getRestrictionLevel() {
@@ -96,6 +101,10 @@ public class DailySimulationData {
         this.recovered = recovered;
     }
 
+    public void setDynamicalInfectionRate(double dynamicalInfectionRate) {
+        this.dynamicalInfectionRate = dynamicalInfectionRate;
+    }
+
     public void setRestrictionLevel(double restrictionLevel) {
         this.restrictionLevel = restrictionLevel;
     }
@@ -118,6 +127,7 @@ public class DailySimulationData {
                 ", healthy=" + healthy +
                 ", dead=" + dead +
                 ", recovered=" + recovered +
+                ", dynamicalInfectionRate=" + dynamicalInfectionRate +
                 ", restrictionLevel=" + restrictionLevel +
                 ", peopleMood=" + peopleMood +
                 ", day=" + day +

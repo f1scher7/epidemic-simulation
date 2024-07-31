@@ -69,7 +69,7 @@ public class EpidemicSimulationService {
                 infectedDaysList.add(0);
             }
 
-            dailySimulationDataList.add(new DailySimulationData(simulation, infectedDaysList.size(), healthy, dead, recovered, restrictionLevel, peopleMood, day));
+            dailySimulationDataList.add(new DailySimulationData(simulation, infectedDaysList.size(), healthy, dead, recovered, infectionRate, restrictionLevel, peopleMood, day));
         }
 
         return dailySimulationDataList;

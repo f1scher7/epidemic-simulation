@@ -4,6 +4,7 @@ export interface DailySimulationDataModel {
     healthy: number;
     dead: number;
     recovered: number;
+    dynamicalInfectionRate: number;
     restrictionLevel: number;
     peopleMood: number;
     day: number;

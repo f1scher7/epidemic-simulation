@@ -31,6 +31,7 @@ export class DailySimulationDataService {
             healthy: dailySimulationData.healthy,
             dead: dailySimulationData.dead,
             recovered: dailySimulationData.recovered,
+            dynamicalInfectionRate: dailySimulationData.dynamicalInfectionRate,
             restrictionLevel: dailySimulationData.restrictionLevel,
             peopleMood: dailySimulationData.peopleMood,
             day: dailySimulationData.day
