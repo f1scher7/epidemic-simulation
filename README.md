@@ -2,6 +2,8 @@
 
 This application is a full-stack simulation system designed to model the spread of a pandemic within a population. It uses Angular for the frontend, Spring Boot for the backend, and PostgreSQL for the database. Users can create, edit, and view simulations to understand how a disease might spread over time based on various parameters.
 
+![EpidemicSimulationDashboard](https://github.com/user-attachments/assets/0af46535-656c-45cc-815c-0f105479e441)
+
 ## Technologies
 
 ### Front-End
