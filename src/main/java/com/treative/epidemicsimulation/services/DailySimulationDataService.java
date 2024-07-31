@@ -51,7 +51,7 @@ public class DailySimulationDataService {
     }
 
 
-    private boolean areAllDailySimulationDataCorrect(List<DailySimulationData> dailySimulationDataList) {
+    boolean areAllDailySimulationDataCorrect(List<DailySimulationData> dailySimulationDataList) {
         if (dailySimulationDataList.isEmpty()) {
             return false;
         }
