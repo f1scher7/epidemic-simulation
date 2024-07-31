@@ -3,15 +3,13 @@ package com.treative.epidemicsimulation.services;
 import com.treative.epidemicsimulation.entity.Simulation;
 import com.treative.epidemicsimulation.repositories.SimulationRepository;
 import com.treative.epidemicsimulation.services.exceptions.NullFieldException;
-import com.treative.epidemicsimulation.services.exceptions.simulation.IncorrectInfectionRateException;
-import com.treative.epidemicsimulation.services.exceptions.simulation.IncorrectInitialInfectedException;
-import com.treative.epidemicsimulation.services.exceptions.simulation.IncorrectMortalityRateException;
-import com.treative.epidemicsimulation.services.exceptions.simulation.SimulationNameAlreadyExistsException;
+import com.treative.epidemicsimulation.services.exceptions.simulation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -28,7 +26,7 @@ public class SimulationService {
     }
 
 
-    public Simulation saveSimulation(Simulation simulation) throws SimulationNameAlreadyExistsException, IncorrectInfectionRateException, IncorrectMortalityRateException, IncorrectInitialInfectedException, NullFieldException {
+    public Simulation saveSimulation(Simulation simulation) throws SimulationNameAlreadyExistsException, IncorrectInfectionRateException, IncorrectMortalityRateException, IncorrectInitialInfectedException, NullFieldException, InitialInfectedExceedsPopulationException {
         if (this.simulationRepository.findByName(simulation.getName()) != null) {
             throw new SimulationNameAlreadyExistsException();
         }
@@ -43,11 +41,14 @@ public class SimulationService {
     }
 
     public List<Simulation> findAllSimulations() {
-        return this.simulationRepository.findAll();
+        List<Simulation> simulations = this.simulationRepository.findAll();
+        Collections.reverse(simulations);
+
+        return  simulations;
     }
 
     @Transactional
-    public Simulation updateSimulation(Simulation updatedSimulation) throws SimulationNameAlreadyExistsException, IncorrectMortalityRateException, IncorrectInfectionRateException, IncorrectInitialInfectedException, NullFieldException {
+    public Simulation updateSimulation(Simulation updatedSimulation) throws SimulationNameAlreadyExistsException, IncorrectMortalityRateException, IncorrectInfectionRateException, IncorrectInitialInfectedException, NullFieldException, InitialInfectedExceedsPopulationException {
         Simulation existingSimulation = this.simulationRepository.findById(updatedSimulation.getId()).orElse(null);
         if (existingSimulation != null) {
             if (!existingSimulation.getName().equals(updatedSimulation.getName()) && simulationRepository.findByName(updatedSimulation.getName()) != null) {
@@ -80,8 +81,8 @@ public class SimulationService {
     }
 
 
-    private void validateSimulation(Simulation simulation) throws IncorrectInfectionRateException, IncorrectMortalityRateException, IncorrectInitialInfectedException, NullFieldException {
-        if (simulation.getName() == null) {
+    private void validateSimulation(Simulation simulation) throws IncorrectInfectionRateException, IncorrectMortalityRateException, IncorrectInitialInfectedException, NullFieldException, InitialInfectedExceedsPopulationException {
+        if (simulation.getName() == null || simulation.getName().isEmpty()) {
             throw new NullFieldException("Name");
         }
 
@@ -107,6 +108,10 @@ public class SimulationService {
 
         if (simulation.getSimulationDays() <= 0) {
             throw new NullFieldException("Simulation days");
+        }
+
+        if (simulation.getPopulation() <= simulation.getInitialInfected()) {
+            throw new InitialInfectedExceedsPopulationException();
         }
 
         if (simulation.getInfectionRate() < 0 || simulation.getInfectionRate() > 1) {
